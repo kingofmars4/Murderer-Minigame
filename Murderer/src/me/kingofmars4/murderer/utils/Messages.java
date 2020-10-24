@@ -13,4 +13,5 @@ public class Messages {
 	public static String mustBePlayer = pluginPrefix + U.color(f.getString("Messages.mustBePlayer"));
 	public static String noArguments = pluginPrefix + U.color(f.getString("Messages.noArguments"));
 	public static String cmdDosntExist = pluginPrefix + U.color(f.getString("Messages.cmdDosntExist"));
+	
 }

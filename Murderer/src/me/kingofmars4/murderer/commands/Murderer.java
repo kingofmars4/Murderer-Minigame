@@ -4,23 +4,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 import me.kingofmars4.murderer.files.FileMaps;
 import me.kingofmars4.murderer.utils.Messages;
 import me.kingofmars4.murderer.utils.U;
 
-public class MapCreating implements CommandExecutor {
+public class Murderer implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,  String[] args) {
 		if (!(sender instanceof Player)) { sender.sendMessage(Messages.mustBePlayer); return true; }
 		Player p = (Player) sender;
 		
-		if (!p.hasPermission("murderer.staff")) { p.sendMessage(Messages.noPermission); return true; }
 		if (cmd.getName().equalsIgnoreCase("murderer")) {
 			if (args.length==0) { p.sendMessage(Messages.noArguments); return true; } else { switch(args[0].toLowerCase()) {
 			
 			case "createmap":
+				if (!p.hasPermission("murderer.staff")) { p.sendMessage(Messages.noPermission); return true; }
 				if (!(args.length == 2)) { p.sendMessage(Messages.pluginPrefix + U.color("&cCorrect usage: &e/murderer createmap (name)")); } else {
 					p.sendMessage(Messages.pluginPrefix + U.color("&aStarting map creation..."));
 					if (FileMaps.get().isConfigurationSection(args[1])) { p.sendMessage(Messages.pluginPrefix + U.color("&e'%map' &calredy exists! ".replaceAll("%map", args[1]))); p.sendMessage(Messages.pluginPrefix + U.color("&cCancelling map creation..."));; return true; }
@@ -31,7 +30,9 @@ public class MapCreating implements CommandExecutor {
 				} break;
 				
 				
+				
 			case "setspawn":
+				if (!p.hasPermission("murderer.staff")) { p.sendMessage(Messages.noPermission); return true; }
 				if (!(args.length == 3)) { p.sendMessage(Messages.pluginPrefix + U.color("&cCorrect usage: &e/murderer setspawn (map) (number)")); } else {
 					if (FileMaps.get().isConfigurationSection(args[1])) {
 						int number;
@@ -44,7 +45,9 @@ public class MapCreating implements CommandExecutor {
 				} break;
 				
 				
+				
 			case "setfragmentspawn":
+				if (!p.hasPermission("murderer.staff")) { p.sendMessage(Messages.noPermission); return true; }
 				if (!(args.length == 3)) { p.sendMessage(Messages.pluginPrefix + U.color("&cCorrect usage: &e/murderer setfragmentspawn (map) (number)")); } else {
 					if (FileMaps.get().isConfigurationSection(args[1])) {
 						int number;
@@ -55,12 +58,12 @@ public class MapCreating implements CommandExecutor {
 						p.sendMessage(Messages.pluginPrefix + U.color("&aYour current position has been set as &e'%map' &6#%number fragment spawnpoint&a!".replaceAll("%map", args[1]).replaceAll("%number", number+"")));
 					} else { p.sendMessage(Messages.pluginPrefix + U.color("&cMap &e'%map' &cdoes not exist!".replaceAll("%map", args[1]))); }
 				} break;
-				
 			default: p.sendMessage(Messages.cmdDosntExist); return true;
 			}
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 }

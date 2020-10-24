@@ -10,7 +10,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import me.kingofmars4.murderer.commands.MapCreating;
+import me.kingofmars4.murderer.commands.Murderer;
 import me.kingofmars4.murderer.files.FileMaps;
 import me.kingofmars4.murderer.listeners.PlayerInteract;
 import me.kingofmars4.murderer.listeners.SignRewriting;
@@ -46,10 +46,10 @@ public class Main extends JavaPlugin implements CommandExecutor {
 	
 	public void enableCommands() {
 		getCommand("teste").setExecutor(this);
-		getCommand("murderer createmap").setExecutor(new MapCreating());
-		getCommand("murderer setspawn").setExecutor(new MapCreating());
-		getCommand("murderer setfragmentspawn").setExecutor(new MapCreating());
-		getCommand("murderer").setExecutor(new MapCreating());
+		getCommand("murderer createmap").setExecutor(new Murderer());
+		getCommand("murderer setspawn").setExecutor(new Murderer());
+		getCommand("murderer setfragmentspawn").setExecutor(new Murderer());
+		getCommand("murderer").setExecutor(new Murderer());
 	}
 	
 	public void enableListeners() {

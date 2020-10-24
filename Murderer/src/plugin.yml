@@ -11,11 +11,14 @@ commands:
         usage: /teste
     murderer setspawn:
         description: Set spawnpoints of a map.
-        usage: /setspawn (map) (number)
+        usage: /murderer setspawn (map) (number)
     murderer setfragmentspawn:
         description: Set spawnpoints of a map.
-        usage: /setfragmentspawn (map) (number)
+        usage: /murderer setfragmentspawn (map) (number)
     murderer createmap:
         description: Create a new map!
-        usage: /createmap (map)
+        usage: /murderer createmap (map)
+    murderer reload:
+        description: Reload all configuration files.
+        usage: /murderer reload    
     murderer:     
