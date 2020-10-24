@@ -1,0 +1,21 @@
+name: Murderer
+author: KingOfMars4
+main: me.kingofmars4.murderer.Main
+version: 1.0
+description: Murderer minigame by KingOfMars4.
+prefix: Murderer
+
+commands:
+    teste:
+        description: Reload the configuration section.
+        usage: /teste
+    murderer setspawn:
+        description: Set spawnpoints of a map.
+        usage: /setspawn (map) (number)
+    murderer setfragmentspawn:
+        description: Set spawnpoints of a map.
+        usage: /setfragmentspawn (map) (number)
+    murderer createmap:
+        description: Create a new map!
+        usage: /createmap (map)
+    murderer:     

@@ -1,0 +1,8 @@
+Options:
+    pluginPrefix: '&4[Murderer] '
+    
+Messages:
+    noPermission: '&cYou lack permissions!'
+    mustBePlayer: '&cYou must be a player in order to use that command!'
+    noArguments: '&cThere are no enough arguments!'
+    cmdDosntExist: '&cThat command does not exist!'
