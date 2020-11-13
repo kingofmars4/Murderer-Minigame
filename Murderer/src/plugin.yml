@@ -18,7 +18,7 @@ commands:
     murderer createmap:
         description: Create a new map!
         usage: /murderer createmap (map)
-    murderer reload:
-        description: Reload all configuration files.
-        usage: /murderer reload    
-    murderer:     
+    murderer deletemap:
+        description: Delete a existing map!
+        usage: /murderer deletemap (map)             
+    murderer:    
