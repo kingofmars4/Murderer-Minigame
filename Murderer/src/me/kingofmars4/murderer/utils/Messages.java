@@ -8,7 +8,7 @@ public class Messages {
 	
 	private static FileConfiguration f = Main.getPlugin().getConfig();
 	
-	public static String pluginPrefix = U.color(f.getString("Options.pluginPrefix"));
+	public static String pluginPrefix = U.pluginPrefix;
 	public static String noPermission = U.color(pluginPrefix + f.getString("Messages.noPermission"));
 	public static String mustBePlayer = pluginPrefix + U.color(f.getString("Messages.mustBePlayer"));
 	public static String noArguments = pluginPrefix + U.color(f.getString("Messages.noArguments"));

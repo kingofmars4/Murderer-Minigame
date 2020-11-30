@@ -5,8 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 
-import me.kingofmars4.murderer.handlers.Game;
-import me.kingofmars4.murderer.handlers.GameManager;
+import me.kingofmars4.murderer.gameHandlers.Game;
+import me.kingofmars4.murderer.gameHandlers.GameManager;
 import me.kingofmars4.murderer.utils.Messages;
 import me.kingofmars4.murderer.utils.U;
 
@@ -22,7 +22,7 @@ public class SignRewriting implements Listener {
 						Game l = GameManager.get().getGame(e.getLine(2));
 						
 						e.setLine(0, U.color("&4[Murderer]"));
-						e.setLine(1, U.color("&a&lOPEN"));
+						e.setLine(1, U.color("&2&lOPEN"));
 						e.setLine(2, U.color("&9&l")+l.getName());
 						e.setLine(3, U.color("&1Right click to join"));
 							

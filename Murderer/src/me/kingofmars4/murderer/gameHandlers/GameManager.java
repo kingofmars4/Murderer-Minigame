@@ -1,32 +1,29 @@
-package me.kingofmars4.murderer.handlers;
+package me.kingofmars4.murderer.gameHandlers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import me.kingofmars4.murderer.files.FileMaps;
 import me.kingofmars4.murderer.utils.Messages;
 import me.kingofmars4.murderer.utils.U;
 
 public class GameManager {
 	
-	private static GameManager mm;
+	private static GameManager gm;
 	private GameManager() {}
 	private final List<Game> Games = new ArrayList<Game>();
 	
 	public static GameManager get() {
-		if (mm == null)
-            mm = new GameManager();
-        return mm;
+		if (gm == null)
+            gm = new GameManager();
+        return gm;
 	}
 	
 	private static String key;
+	
+	
 	public void loadCache() {
 		if (!FileMaps.get().isConfigurationSection("Maps")) { return; }
 		for (String k : FileMaps.get().getConfigurationSection("Maps").getKeys(true)) {
@@ -85,64 +82,19 @@ public class GameManager {
         return false;
     }
 	
-	
-	private final Map<UUID, Location> locs = new HashMap<UUID, Location>();
-	private final Map<UUID, ItemStack[]> inv = new HashMap<UUID, ItemStack[]>();
-    private final Map<UUID, ItemStack[]> armor = new HashMap<UUID, ItemStack[]>();
-    public void addPlayer(Player p, Game m) {
-    	ItemStack leaveGame = U.createItemStack(Material.REDSTONE_TORCH_ON, "&cLeave Games");
-        
-        m.getPlayers().add(p);
-        
-        inv.put(p.getUniqueId(), p.getInventory().getContents());
-        armor.put(p.getUniqueId(), p.getInventory().getArmorContents());
- 
-        p.getInventory().setArmorContents(null);
-        p.getInventory().clear();
-        
-        locs.put(p.getUniqueId(), p.getLocation());
-        p.teleport(m.getLobbySpawn());
-		p.getInventory().setItem(8, leaveGame);
-		p.sendMessage(Messages.pluginPrefix+U.color("&aYou have joined the game!"));
-    }
-    
-    public void removePlayer(Player p) {
-        Game a = null;
-
-        // Searches each arena for the player
-        for (Game l : this.Games) {
-            if (l.getPlayers().contains(p))
-                a = l;
+	public Game getPlayerGame(Player p) {
+		for (Game a : this.Games) {
+            if (a.getPlayers().contains(p))
+                return a;
         }
-
-        if (a == null) {
-            p.sendMessage("Invalid operation!");
-            return;
-        }
-
-        a.getPlayers().remove(p);
-
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        
-        p.getInventory().setContents(inv.get(p.getUniqueId()));
-        p.getInventory().setArmorContents(armor.get(p.getUniqueId()));
-        
-        inv.remove(p.getUniqueId());
-        armor.remove(p.getUniqueId());
-
-        p.teleport(locs.get(p.getUniqueId()));
-        locs.remove(p.getUniqueId());
-        p.setFireTicks(0);
-        p.updateInventory();
-    }
+        return null;
+	}
     
     public void forceShutdown()  {
+    	Bukkit.broadcastMessage(U.pluginPrefix + U.color("&c&lSHUTING DOWN ALL CURRENT ONGOING GAMES!!"));
     	for (Game l : Games) {
-    		for (Player p : l.getPlayers()) {
-    			p.sendMessage(Messages.pluginPrefix + U.color("&c&lSHUTING DOWN ALL CURRENT ONGOING GAMES!!"));
-    			removePlayer(p);
-    		}
+    		l.end();
     	}
+    	
     }
 }

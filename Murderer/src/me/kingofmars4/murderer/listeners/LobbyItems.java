@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-import me.kingofmars4.murderer.handlers.GameManager;
+import me.kingofmars4.murderer.gameHandlers.GameManager;
 import me.kingofmars4.murderer.utils.Messages;
 import me.kingofmars4.murderer.utils.U;
 
@@ -20,8 +20,9 @@ public class LobbyItems implements Listener {
 			Player p = e.getPlayer();
 			if (p.getItemInHand().getType().equals(Material.REDSTONE_TORCH_ON)) {
 				if (p.getItemInHand().getItemMeta().getDisplayName().equals(U.color("&cLeave Lobby"))) {
+					e.setCancelled(true);
 					if (GameManager.get().isInGame(p)) {
-						GameManager.get().removePlayer(p);
+						GameManager.get().getPlayerGame(p).removePlayer(p);
 						p.sendMessage(Messages.pluginPrefix+U.color("&cYou have left the game!"));
 					} else { p.sendMessage(Messages.pluginPrefix+U.color("&cYou must be in a lobby to use this item!")); }
 				}

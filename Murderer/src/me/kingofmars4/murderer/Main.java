@@ -7,13 +7,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.ScoreboardManager;
 import me.kingofmars4.murderer.commands.Murderer;
 import me.kingofmars4.murderer.files.FileMaps;
-import me.kingofmars4.murderer.handlers.GameManager;
+import me.kingofmars4.murderer.gameHandlers.GameManager;
 import me.kingofmars4.murderer.listeners.UseSign;
 import me.kingofmars4.murderer.listeners.LobbyItems;
 import me.kingofmars4.murderer.listeners.SignRewriting;
@@ -82,13 +83,9 @@ public class Main extends JavaPlugin implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,  String[] args) {
+		Player p = (Player) sender;
 		
-		/*murderer.addPlayer(p);
-		p.setScoreboard(board);
-		p.sendMessage("adicionado a " + murderer.getDisplayName());
-		System.out.println(murderer.getPlayers());
-		System.out.println(murderer.getDisplayName());
-		p.sendMessage(Messages.noPermission);*/
+		GameManager.get().getPlayerGame(p).start();
 		
 		return true;
 	}

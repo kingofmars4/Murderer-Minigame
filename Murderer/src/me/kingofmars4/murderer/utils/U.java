@@ -8,10 +8,14 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import me.kingofmars4.murderer.Main;
+
 public class U {
 	
+	public static String pluginPrefix = color(Main.getPlugin().getConfig().getString("Options.pluginPrefix"));
+	
+	
 	public static String color(String s) {
-		
 		return s.replaceAll("&", "§");
 	}
 	
